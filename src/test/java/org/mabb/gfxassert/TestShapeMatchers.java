@@ -85,7 +85,6 @@ public class TestShapeMatchers {
     public void givenRectInTopRightArea_whenAssertShapeInBottomLeftArea_thenAssertFalse() {
         Rectangle2D.Double targetRect = new Rectangle2D.Double(55, 0, 5, 5);
         Assert.assertThat(containingRect, containsShape(targetRect).notIn(bottomLeftArea()));
-
     }
     
     @Test
