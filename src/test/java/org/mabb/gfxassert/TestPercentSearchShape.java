@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import java.awt.geom.Rectangle2D;
 
-import static org.mabb.gfxassert.ShapeMatchers.containsShape;
+import static org.mabb.gfxassert.GfxAssertMatchers.containsShape;
 import static org.mabb.gfxassert.ShapeSearchArea.*;
 
 public class TestPercentSearchShape {

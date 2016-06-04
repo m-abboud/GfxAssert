@@ -24,7 +24,7 @@ public class ShapeSearchArea {
     private static final String BOTTOM_LEFT_DESCRIPTION = "Bottom Left Area";
 
     public ShapeSearchArea(AreaDescriptor... shapes) {
-        this.searchAreas.addAll(Arrays.asList(shapes));
+        searchAreas.addAll(Arrays.asList(shapes));
     }
 
     public static ShapeSearchArea topArea() {
@@ -45,8 +45,8 @@ public class ShapeSearchArea {
 
     public static ShapeSearchArea topRightArea() {
         ShapeSearchArea area = new ShapeSearchArea();
-        area.searchAreas.add(new PercentArea(50, TOP));
-        area.searchAreas.add(new PercentArea(50, RIGHT));
+        area.add(new PercentArea(50, TOP));
+        area.add(new PercentArea(50, RIGHT));
         area.description = TOP_RIGHT_DESCRIPTION;
 
         return area;
@@ -54,8 +54,8 @@ public class ShapeSearchArea {
 
     public static ShapeSearchArea topLeftArea() {
         ShapeSearchArea area = new ShapeSearchArea();
-        area.searchAreas.add(new PercentArea(50, TOP));
-        area.searchAreas.add(new PercentArea(50, LEFT));
+        area.add(new PercentArea(50, TOP));
+        area.add(new PercentArea(50, LEFT));
         area.description = TOP_LEFT_DESCRIPTION;
 
         return area;
@@ -63,8 +63,8 @@ public class ShapeSearchArea {
 
     public static ShapeSearchArea bottomRightArea() {
         ShapeSearchArea area = new ShapeSearchArea();
-        area.searchAreas.add(new PercentArea(50, BOTTOM));
-        area.searchAreas.add(new PercentArea(50, RIGHT));
+        area.add(new PercentArea(50, BOTTOM));
+        area.add(new PercentArea(50, RIGHT));
         area.description = BOTTOM_RIGHT_DESCRIPTION;
 
         return area;
@@ -72,8 +72,8 @@ public class ShapeSearchArea {
 
     public static ShapeSearchArea bottomLeftArea() {
         ShapeSearchArea area = new ShapeSearchArea();
-        area.searchAreas.add(new PercentArea(50, BOTTOM));
-        area.searchAreas.add(new PercentArea(50, LEFT));
+        area.add(new PercentArea(50, BOTTOM));
+        area.add(new PercentArea(50, LEFT));
         area.description = BOTTOM_LEFT_DESCRIPTION;
 
         return area;
@@ -81,13 +81,13 @@ public class ShapeSearchArea {
 
     public static ShapeSearchArea all() {
         ShapeSearchArea area = new ShapeSearchArea();
-        area.searchAreas.add(new PercentArea(100, ALL));
+        area.add(new PercentArea(100, ALL));
         area.description = ALL_AREA_DESCRIPTION;
 
         return area;
     }
 
-    List<Rectangle2D> getScaledSearchShapes(Shape container) {
+    public List<Rectangle2D> getToScale(Shape container) {
         List<Rectangle2D> scaledAreas = new ArrayList<Rectangle2D>(searchAreas.size());
 
         for (AreaDescriptor area : searchAreas)
@@ -104,10 +104,10 @@ public class ShapeSearchArea {
         return description;
     }
 
-    boolean contains(Shape target, Shape container) {
+    public boolean contains(Shape target, Shape container) {
         Rectangle2D targetRect = target.getBounds2D();
 
-        for (Rectangle2D searchShapeOn : getScaledSearchShapes(container)) {
+        for (Rectangle2D searchShapeOn : getToScale(container)) {
             if (!searchShapeOn.contains(targetRect))
                 return false;
         }
@@ -135,6 +135,9 @@ public class ShapeSearchArea {
         return new PercentArea(num, BOTTOM);
     }
 
+    /**
+     * Seperate class in order to force .percent() or .pixels() syntax after a bottom(20)
+     */
     public abstract static class AreaDescriptor {
         protected enum SearchType {
             TOP, BOTTOM, RIGHT, LEFT, CENTER, ALL
@@ -159,12 +162,10 @@ public class ShapeSearchArea {
         public abstract Shape applyForContainer(Shape container);
     }
 
-
     public static class PercentArea extends AreaDescriptor {
         public PercentArea(double num, SearchType type) {
             super(num, type);
         }
-
 
         public Shape applyForContainer(Shape container) {
             Rectangle2D.Double rect;

@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.awt.geom.Rectangle2D;
 
 import static org.hamcrest.CoreMatchers.not;
-import static org.mabb.gfxassert.ShapeMatchers.*;
+import static org.mabb.gfxassert.GfxAssertMatchers.*;
 import static org.mabb.gfxassert.ShapeSearchArea.*;
 
 public class TestShapeMatchers {
