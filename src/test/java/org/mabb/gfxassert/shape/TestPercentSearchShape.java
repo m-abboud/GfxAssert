@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.awt.geom.Rectangle2D;
 
 import static org.mabb.gfxassert.GfxAssertMatchers.containsShape;
-import static org.mabb.gfxassert.geom.ShapeSubsetDescriptor.*;
+import static org.mabb.gfxassert.geom.ShapeSubset.*;
 
 public class TestPercentSearchShape {
     Rectangle2D.Double containingRect = new Rectangle2D.Double(0, 0, 100, 100);

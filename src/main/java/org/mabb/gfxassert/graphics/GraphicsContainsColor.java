@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
-public class GraphicsContainsColor extends GraphicsMatcher{
+public class GraphicsContainsColor extends GraphicsMatcher {
     protected Color findColor;
 
     protected GraphicsContainsColor(Color color) {

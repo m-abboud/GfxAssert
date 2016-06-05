@@ -1,19 +1,18 @@
 package org.mabb.gfxassert.shape;
 
-import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.TypeSafeMatcher;
-import org.mabb.gfxassert.geom.ShapeSubsetDescriptor;
+import org.mabb.gfxassert.geom.ShapeSubset;
 
 import java.awt.*;
-import static org.mabb.gfxassert.geom.ShapeSubsetDescriptor.all;
 
-public class ShapeMatcher extends TypeSafeMatcher<Shape> {
+import static org.mabb.gfxassert.geom.ShapeSubset.all;
+
+public abstract class ShapeMatcher extends TypeSafeMatcher<Shape> {
+    protected boolean exclude = false;
     protected final Shape target;
-    protected ShapeSubsetDescriptor searchArea;
-    boolean exclude = false;
+    protected ShapeSubset searchArea;
 
-    protected ShapeMatcher(Shape target, ShapeSubsetDescriptor searchBox) {
+    protected ShapeMatcher(Shape target, ShapeSubset searchBox) {
         this.target = target;
         this.searchArea = searchBox;
     }
@@ -23,34 +22,13 @@ public class ShapeMatcher extends TypeSafeMatcher<Shape> {
         this.searchArea = all();
     }
 
-    public boolean matchesSafely(Shape item) {
-        return this.search(item);
-    }
-
-    public void describeMismatchSafely(Shape item, Description mismatchDescription) {
-        mismatchDescription.appendText("was not inside ").appendText(searchArea.toString());
-    }
-
-    public void describeTo(Description description) {
-        description.appendText("target shape inside ").appendText(searchArea.toString()).appendText(" of container shape, ").appendValue(target);
-    }
-
-    public ShapeMatcher in(ShapeSubsetDescriptor searchBox) {
+    public ShapeMatcher in(ShapeSubset searchBox) {
         this.searchArea = searchBox;
         return this;
     }
 
-    public ShapeMatcher notIn(ShapeSubsetDescriptor searchBox) {
+    public ShapeMatcher notIn(ShapeSubset searchBox) {
         exclude = true;
         return in(searchBox);
-    }
-
-    public boolean search(Shape container) {
-        return exclude != searchArea.contains(target, container);
-    }
-
-    @Factory
-    public static ShapeMatcher containsShape(Shape shape) {
-        return new ShapeMatcher(shape);
     }
 }

@@ -1,4 +1,5 @@
 package org.mabb.gfxassert.graphics;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.mabb.gfxassert.TestUtils;
@@ -9,9 +10,9 @@ import java.io.IOException;
 
 import static org.hamcrest.CoreMatchers.not;
 import static org.mabb.gfxassert.GfxAssertMatchers.*;
-import static org.mabb.gfxassert.geom.ShapeSubsetDescriptor.*;
+import static org.mabb.gfxassert.geom.ShapeSubset.*;
 
-public class TestGraphicsContainsColor {
+public class TestContainsColor {
     @Test
     public void givenImageWithBlueInTopHalf_whenAssertBlueInTopHalf_assertIsTrue() throws IOException {
         BufferedImage image = TestUtils.loadImage("test-image-contains-colors.png");

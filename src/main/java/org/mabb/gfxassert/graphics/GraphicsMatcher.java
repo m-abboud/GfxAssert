@@ -1,14 +1,14 @@
 package org.mabb.gfxassert.graphics;
 
 import org.mabb.gfxassert.MultiTypeSafeMatcher;
-import org.mabb.gfxassert.geom.ShapeSubsetDescriptor;
+import org.mabb.gfxassert.geom.ShapeSubset;
 
 import java.awt.image.BufferedImage;
 
-import static org.mabb.gfxassert.geom.ShapeSubsetDescriptor.all;
+import static org.mabb.gfxassert.geom.ShapeSubset.all;
 
 public abstract class GraphicsMatcher extends MultiTypeSafeMatcher<BufferedImage> {
-    protected ShapeSubsetDescriptor searchArea;
+    protected ShapeSubset searchArea;
     protected GfxAssertImage graphics;
 
     protected boolean exclude = false;
@@ -17,12 +17,12 @@ public abstract class GraphicsMatcher extends MultiTypeSafeMatcher<BufferedImage
         searchArea = all();
     }
 
-    public GraphicsMatcher in(ShapeSubsetDescriptor searchBox) {
+    public GraphicsMatcher in(ShapeSubset searchBox) {
         this.searchArea = searchBox;
         return this;
     }
 
-    public GraphicsMatcher notIn(ShapeSubsetDescriptor searchBox) {
+    public GraphicsMatcher notIn(ShapeSubset searchBox) {
         exclude = true;
         return in(searchBox);
     }

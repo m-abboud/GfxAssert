@@ -7,9 +7,9 @@ import java.awt.geom.Rectangle2D;
 
 import static org.hamcrest.CoreMatchers.not;
 import static org.mabb.gfxassert.GfxAssertMatchers.*;
-import static org.mabb.gfxassert.geom.ShapeSubsetDescriptor.*;
+import static org.mabb.gfxassert.geom.ShapeSubset.*;
 
-public class TestShapeMatchers {
+public class TestContainsShape {
     Rectangle2D.Double containingRect = new Rectangle2D.Double(0, 0, 100, 100);
     
     @Test
