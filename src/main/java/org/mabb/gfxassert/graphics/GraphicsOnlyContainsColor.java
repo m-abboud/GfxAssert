@@ -3,14 +3,14 @@ package org.mabb.gfxassert.graphics;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 
-import java.awt.*;
-import java.awt.geom.Rectangle2D;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.util.List;
 
-public class GraphicsContainsColor extends GraphicsMatcher{
+public class GraphicsOnlyContainsColor extends GraphicsMatcher{
     protected Color findColor;
 
-    protected GraphicsContainsColor(Color color) {
+    protected GraphicsOnlyContainsColor(Color color) {
         super();
         this.findColor = color;
     }
@@ -21,7 +21,10 @@ public class GraphicsContainsColor extends GraphicsMatcher{
 
     boolean search(BufferedImage image) {
         graphics = new GfxAssertImage(image);
-        return exclude != graphics.contains(searchArea, findColor);
+        List<Color> colors = graphics.findAllColors(searchArea);
+        boolean hasOnlyColor = colors.size() == 1 && colors.contains(findColor);
+
+        return exclude != hasOnlyColor;
     }
 
     public void describeMismatchSafely(BufferedImage item, Description mismatchDescription) {
@@ -34,7 +37,7 @@ public class GraphicsContainsColor extends GraphicsMatcher{
     }
 
     @Factory
-    public static GraphicsMatcher containsColor(Color color) {
-        return new GraphicsContainsColor(color);
+    public static GraphicsMatcher containsOnlyColor(Color color) {
+        return new GraphicsOnlyContainsColor(color);
     }
 }

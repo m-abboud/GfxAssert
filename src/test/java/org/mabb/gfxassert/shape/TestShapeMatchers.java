@@ -1,4 +1,4 @@
-package org.mabb.gfxassert;
+package org.mabb.gfxassert.shape;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -7,7 +7,7 @@ import java.awt.geom.Rectangle2D;
 
 import static org.hamcrest.CoreMatchers.not;
 import static org.mabb.gfxassert.GfxAssertMatchers.*;
-import static org.mabb.gfxassert.ShapeSearchArea.*;
+import static org.mabb.gfxassert.geom.ShapeSubsetDescriptor.*;
 
 public class TestShapeMatchers {
     Rectangle2D.Double containingRect = new Rectangle2D.Double(0, 0, 100, 100);

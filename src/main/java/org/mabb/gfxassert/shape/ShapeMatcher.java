@@ -1,17 +1,19 @@
-package org.mabb.gfxassert;
+package org.mabb.gfxassert.shape;
 
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.TypeSafeMatcher;
+import org.mabb.gfxassert.geom.ShapeSubsetDescriptor;
+
 import java.awt.*;
-import static org.mabb.gfxassert.ShapeSearchArea.all;
+import static org.mabb.gfxassert.geom.ShapeSubsetDescriptor.all;
 
 public class ShapeMatcher extends TypeSafeMatcher<Shape> {
     protected final Shape target;
-    protected ShapeSearchArea searchArea;
+    protected ShapeSubsetDescriptor searchArea;
     boolean exclude = false;
 
-    protected ShapeMatcher(Shape target, ShapeSearchArea searchBox) {
+    protected ShapeMatcher(Shape target, ShapeSubsetDescriptor searchBox) {
         this.target = target;
         this.searchArea = searchBox;
     }
@@ -33,12 +35,12 @@ public class ShapeMatcher extends TypeSafeMatcher<Shape> {
         description.appendText("target shape inside ").appendText(searchArea.toString()).appendText(" of container shape, ").appendValue(target);
     }
 
-    public ShapeMatcher in(ShapeSearchArea searchBox) {
+    public ShapeMatcher in(ShapeSubsetDescriptor searchBox) {
         this.searchArea = searchBox;
         return this;
     }
 
-    public ShapeMatcher notIn(ShapeSearchArea searchBox) {
+    public ShapeMatcher notIn(ShapeSubsetDescriptor searchBox) {
         exclude = true;
         return in(searchBox);
     }

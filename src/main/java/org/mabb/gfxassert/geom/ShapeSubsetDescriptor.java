@@ -1,4 +1,4 @@
-package org.mabb.gfxassert;
+package org.mabb.gfxassert.geom;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.mabb.gfxassert.ShapeSearchArea.AreaDescriptor.SearchType.*;
+import static org.mabb.gfxassert.geom.ShapeSubsetDescriptor.AreaDescriptor.SearchType.*;
 
-public class ShapeSearchArea {
+public class ShapeSubsetDescriptor {
     protected List<AreaDescriptor> searchAreas = new ArrayList<AreaDescriptor>();
     protected String description = "Area";
 
@@ -23,28 +23,28 @@ public class ShapeSearchArea {
     private static final String BOTTOM_RIGHT_DESCRIPTION = "Bottom Right Area";
     private static final String BOTTOM_LEFT_DESCRIPTION = "Bottom Left Area";
 
-    public ShapeSearchArea(AreaDescriptor... shapes) {
+    public ShapeSubsetDescriptor(AreaDescriptor... shapes) {
         searchAreas.addAll(Arrays.asList(shapes));
     }
 
-    public static ShapeSearchArea topArea() {
+    public static ShapeSubsetDescriptor topArea() {
         return top(50).percent();
     }
 
-    public static ShapeSearchArea bottomArea() {
+    public static ShapeSubsetDescriptor bottomArea() {
         return bottom(50).percent();
     }
 
-    public static ShapeSearchArea leftArea() {
+    public static ShapeSubsetDescriptor leftArea() {
         return left(50).percent();
     }
 
-    public static ShapeSearchArea rightArea() {
+    public static ShapeSubsetDescriptor rightArea() {
         return right(50).percent();
     }
 
-    public static ShapeSearchArea topRightArea() {
-        ShapeSearchArea area = new ShapeSearchArea();
+    public static ShapeSubsetDescriptor topRightArea() {
+        ShapeSubsetDescriptor area = new ShapeSubsetDescriptor();
         area.add(new PercentArea(50, TOP));
         area.add(new PercentArea(50, RIGHT));
         area.description = TOP_RIGHT_DESCRIPTION;
@@ -52,8 +52,8 @@ public class ShapeSearchArea {
         return area;
     }
 
-    public static ShapeSearchArea topLeftArea() {
-        ShapeSearchArea area = new ShapeSearchArea();
+    public static ShapeSubsetDescriptor topLeftArea() {
+        ShapeSubsetDescriptor area = new ShapeSubsetDescriptor();
         area.add(new PercentArea(50, TOP));
         area.add(new PercentArea(50, LEFT));
         area.description = TOP_LEFT_DESCRIPTION;
@@ -61,8 +61,8 @@ public class ShapeSearchArea {
         return area;
     }
 
-    public static ShapeSearchArea bottomRightArea() {
-        ShapeSearchArea area = new ShapeSearchArea();
+    public static ShapeSubsetDescriptor bottomRightArea() {
+        ShapeSubsetDescriptor area = new ShapeSubsetDescriptor();
         area.add(new PercentArea(50, BOTTOM));
         area.add(new PercentArea(50, RIGHT));
         area.description = BOTTOM_RIGHT_DESCRIPTION;
@@ -70,8 +70,8 @@ public class ShapeSearchArea {
         return area;
     }
 
-    public static ShapeSearchArea bottomLeftArea() {
-        ShapeSearchArea area = new ShapeSearchArea();
+    public static ShapeSubsetDescriptor bottomLeftArea() {
+        ShapeSubsetDescriptor area = new ShapeSubsetDescriptor();
         area.add(new PercentArea(50, BOTTOM));
         area.add(new PercentArea(50, LEFT));
         area.description = BOTTOM_LEFT_DESCRIPTION;
@@ -79,8 +79,8 @@ public class ShapeSearchArea {
         return area;
     }
 
-    public static ShapeSearchArea all() {
-        ShapeSearchArea area = new ShapeSearchArea();
+    public static ShapeSubsetDescriptor all() {
+        ShapeSubsetDescriptor area = new ShapeSubsetDescriptor();
         area.add(new PercentArea(100, ALL));
         area.description = ALL_AREA_DESCRIPTION;
 
@@ -151,12 +151,12 @@ public class ShapeSearchArea {
             this.searchArea = bottom;
         }
 
-        public ShapeSearchArea percent() {
-            return new ShapeSearchArea(new PercentArea(number, searchArea));
+        public ShapeSubsetDescriptor percent() {
+            return new ShapeSubsetDescriptor(new PercentArea(number, searchArea));
         }
 
-        public ShapeSearchArea pixels() {
-            return new ShapeSearchArea(new PixelArea(number, searchArea));
+        public ShapeSubsetDescriptor pixels() {
+            return new ShapeSubsetDescriptor(new PixelArea(number, searchArea));
         }
 
         public abstract Shape applyForContainer(Shape container);

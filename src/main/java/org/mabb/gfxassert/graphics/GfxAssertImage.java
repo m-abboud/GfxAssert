@@ -1,6 +1,6 @@
 package org.mabb.gfxassert.graphics;
 
-import org.mabb.gfxassert.ShapeSearchArea;
+import org.mabb.gfxassert.geom.ShapeSubsetDescriptor;
 
 import java.awt.Color;
 import java.awt.geom.Rectangle2D;
@@ -14,21 +14,21 @@ class GfxAssertImage extends BufferedImage {
                 target.getColorModel().isAlphaPremultiplied(), null);
     }
 
-    public boolean contains(ShapeSearchArea search, Color findColor) {
+    public boolean contains(ShapeSubsetDescriptor search, Color findColor) {
         StopOnColorFound strat = new StopOnColorFound(findColor);
         searchPixels(search, strat);
 
         return strat.found;
     }
 
-    public List<Color> findAllColors(ShapeSearchArea area) {
+    public List<Color> findAllColors(ShapeSubsetDescriptor area) {
         FindAllColors strat = new FindAllColors();
         searchPixels(area, strat);
 
         return strat.colors;
     }
 
-    protected void searchPixels(ShapeSearchArea area, PixelSearchStrategy strat) {
+    protected void searchPixels(ShapeSubsetDescriptor area, PixelSearchStrategy strat) {
         List<Rectangle2D> shapes = area.getToScale(getBounds());
 
         for (Rectangle2D rectOn : shapes)
