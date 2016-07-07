@@ -7,7 +7,7 @@ Uses hamcrest matchers and alternate static assert methods.
 		<dependency>
 			<groupId>org.mabb.gfxassert</groupId>
 			<artifactId>GfxAssert</artifactId>
-            <version>0.1.0</version>
+            <version>0.1.2</version>
 		</dependency>
     </dependencies>
 
