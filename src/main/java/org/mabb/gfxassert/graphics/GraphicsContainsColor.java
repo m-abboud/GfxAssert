@@ -20,9 +20,10 @@ package org.mabb.gfxassert.graphics;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 
-import java.awt.*;
+import java.awt.Color;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.util.List;
 
 public class GraphicsContainsColor extends GraphicsMatcher {
     protected Color findColor;
@@ -46,9 +47,11 @@ public class GraphicsContainsColor extends GraphicsMatcher {
     }
 
     public void describeTo(Description description) {
-        description.appendText("target graphics inside ").appendText(searchArea.toString()).
-                appendText(" of container graphics, ").appendValue(graphics.findAllColors(searchArea));
+        description.appendText("color ").appendValue(formatColor(findColor)).
+                appendText(" inside ").appendValue(searchArea.toString()).
+                appendText(" of target image.");
     }
+
 
     @Factory
     public static GraphicsMatcher containsColor(Color color) {

@@ -42,6 +42,11 @@ public class GraphicsContainsColors extends GraphicsMatcher {
             matcherOn.describeTo(description);
     }
 
+    protected void describeItemMismatch(Object item, Description description) {
+        for (GraphicsContainsColor matcherOn : matchers)
+            matcherOn.describeItemMismatch(item, description);
+    }
+
     protected boolean matchesSafely(BufferedImage item) {
         boolean result = true;
         for (GraphicsContainsColor matcherOn : matchers)

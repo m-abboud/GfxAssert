@@ -17,6 +17,8 @@
 
 package org.mabb.gfxassert.geom;
 
+import com.sun.xml.internal.ws.util.StringUtils;
+
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
@@ -27,7 +29,7 @@ import static org.mabb.gfxassert.geom.ShapeSubset.AreaDescriptor.SearchType.*;
 
 public class ShapeSubset {
     protected List<AreaDescriptor> searchAreas = new ArrayList<AreaDescriptor>();
-    protected String description = "Area";
+    protected String description = "";
 
     private static final String TOP_AREA_DESCRIPTION = "Top Area";
     private static final String BOTTOM_AREA_DESCRIPTION = "Bottom Area";
@@ -118,7 +120,19 @@ public class ShapeSubset {
     }
 
     public String toString() {
-        return description;
+        if (!description.isEmpty())
+            return description;
+
+        String formattedAreas = "";
+
+        for (AreaDescriptor area : searchAreas) {
+            if (!formattedAreas.isEmpty())
+                formattedAreas += " and ";
+
+            formattedAreas += area.toString();
+        }
+
+        return formattedAreas;
     }
 
     public boolean contains(Shape target, Shape container) {
@@ -188,6 +202,11 @@ public class ShapeSubset {
         }
 
         public abstract Shape applyForContainer(Shape container);
+
+        public String toString() {
+            String area = StringUtils.capitalize(searchArea.toString().toLowerCase());
+            return area + " " + number;
+        }
     }
 
     public static class PercentArea extends AreaDescriptor {
@@ -236,6 +255,10 @@ public class ShapeSubset {
 
             return scaledAreaOn;
         }
+
+        public String toString() {
+            return super.toString() + "%";
+        }
     }
 
     public static class PixelArea extends AreaDescriptor {
@@ -274,6 +297,10 @@ public class ShapeSubset {
             }
 
             return rect;
+        }
+
+        public String toString() {
+            return super.toString() + "px";
         }
     }
 }

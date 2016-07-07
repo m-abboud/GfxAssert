@@ -87,14 +87,18 @@ public abstract class MultiTypeSafeMatcher<T> extends BaseMatcher<T> {
         if (item == null) {
             super.describeMismatch(item, description);
         } else if (!isInstanceOfConvertableTypes(item)) {
-            description.appendText("was a ")
-                    .appendText(item.getClass().getName())
-                    .appendText(" (")
-                    .appendValue(item)
-                    .appendText(")");
+            describeItemMismatch(item, description);
         } else {
             describeMismatchSafely((T) item, description);
         }
+    }
+
+    protected void describeItemMismatch(Object item, Description description) {
+        description.appendText("was a ")
+                .appendText(item.getClass().getName())
+                .appendText(" (")
+                .appendValue(item)
+                .appendText(")");
     }
 }
 

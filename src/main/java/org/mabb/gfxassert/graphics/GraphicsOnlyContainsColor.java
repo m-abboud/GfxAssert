@@ -49,8 +49,9 @@ public class GraphicsOnlyContainsColor extends GraphicsMatcher {
     }
 
     public void describeTo(Description description) {
-        description.appendText("target graphics inside ").appendText(searchArea.toString()).
-                appendText(" of container graphics, ").appendValue(graphics.findAllColors(searchArea));
+        description.appendText("only color ").appendValue(formatColor(findColor)).
+                appendText(" inside ").appendValue(searchArea.toString()).
+                appendText(" of target image.");
     }
 
     @Factory
