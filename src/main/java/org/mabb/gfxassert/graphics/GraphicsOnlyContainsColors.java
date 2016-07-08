@@ -47,8 +47,8 @@ public class GraphicsOnlyContainsColors extends GraphicsMatcher {
         return exclude != hasOnlyColor;
     }
 
-    public void describeMismatchSafely(BufferedImage item, Description mismatchDescription) {
-        mismatchDescription.appendText("was not inside ").appendText(searchArea.toString());
+    public void describeMismatchSafely(BufferedImage item, Description description) {
+        description.appendText("was not inside ").appendText(searchArea.toString());
     }
 
     public void describeTo(Description description) {

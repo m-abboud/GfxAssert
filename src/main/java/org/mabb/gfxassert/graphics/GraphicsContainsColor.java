@@ -52,7 +52,6 @@ public class GraphicsContainsColor extends GraphicsMatcher {
                 appendText(" of target image.");
     }
 
-
     @Factory
     public static GraphicsMatcher containsColor(Color color) {
         return new GraphicsContainsColor(color);

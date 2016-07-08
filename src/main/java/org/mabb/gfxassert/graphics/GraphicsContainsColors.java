@@ -28,31 +28,38 @@ import java.util.List;
 import static org.mabb.gfxassert.graphics.GraphicsContainsColor.containsColor;
 
 public class GraphicsContainsColors extends GraphicsMatcher {
-    List<GraphicsContainsColor> matchers = new ArrayList<GraphicsContainsColor>();
+    private final Color[] findColors;
 
     GraphicsContainsColors(Color[] colors) {
         super();
-
-        for (Color colorOn : colors)
-            matchers.add((GraphicsContainsColor) containsColor(colorOn));
+        this.findColors = colors;
     }
 
-    public void describeTo(Description description) {
-        for (GraphicsContainsColor matcherOn : matchers)
-            matcherOn.describeTo(description);
-    }
+    boolean search(BufferedImage image) {
+        graphics = new GfxAssertImage(image);
+        List<Color> colors = graphics.findAllColors(searchArea);
 
-    protected void describeItemMismatch(Object item, Description description) {
-        for (GraphicsContainsColor matcherOn : matchers)
-            matcherOn.describeItemMismatch(item, description);
+        boolean hasOnlyColors = true;
+        for (Color colorOn : findColors)
+            hasOnlyColors = hasOnlyColors && colors.contains(colorOn);
+
+        return exclude != hasOnlyColors;
     }
 
     protected boolean matchesSafely(BufferedImage item) {
-        boolean result = true;
-        for (GraphicsContainsColor matcherOn : matchers)
-            result = result && matcherOn.matchesSafely(item);
+        return this.search(item);
+    }
 
-        return result;
+    public void describeTo(Description description) {
+        List<Color> colors = graphics.findAllColors(searchArea);
+
+        description.appendText("colors ").appendValue(formatColors(colors)).
+                appendText(" inside ").appendValue(searchArea.toString()).
+                appendText(" of target image.");
+    }
+
+    protected void describeItemMismatch(Object item, Description description) {
+        description.appendText("was not inside ").appendText(searchArea.toString());
     }
 
     public static GraphicsMatcher containsColors(Color[] colors) {
