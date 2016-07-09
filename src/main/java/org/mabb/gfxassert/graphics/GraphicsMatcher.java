@@ -62,7 +62,12 @@ public abstract class GraphicsMatcher extends MultiTypeSafeMatcher<BufferedImage
     }
 
     protected String formatColor(Color color) {
-        return String.format("[r=%d,g=%d,b=%d]", color.getRed(), color.getGreen(), color.getBlue());
+        String alpha = "";
+        if (color.getAlpha() != 255)
+            alpha = ",a=" + color.getAlpha();
+        
+        return String.format("[r=%d,g=%d,b=%d%s]", color.getRed(), color.getGreen(), color.getBlue(), alpha);
+
     }
 
     protected String formatColors(List<Color> colors) {

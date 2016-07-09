@@ -61,7 +61,7 @@ class GfxAssertImage extends BufferedImage {
 
         for (int x = xBegin; x < xEnd; x++) {
             for (int y = yBegin; y < yEnd; y++) {
-                Color colorOn = new Color(getRGB(x, y));
+                Color colorOn = new Color(getRGB(x, y), true);
                 boolean shouldStop = strat.onPixel(colorOn, x, y);
 
                 if (shouldStop)

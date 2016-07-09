@@ -68,4 +68,10 @@ public class TestContainsColor {
         BufferedImage image = TestUtils.loadImage("test-image-contains-colors.png");
         Assert.assertThat(image, not(containsColors(Color.red, Color.black, Color.blue, Color.pink)));
     }
+
+    @Test
+    public void givenImageWithTransparentColor_whenAssertHasColor_colorHasAlphaValueAndAssertTrue() throws IOException {
+        BufferedImage image = TestUtils.loadImage("transparent-color.png");
+        Assert.assertThat(image, containsColor(new Color(0, 0, 0, 157)));
+    }
 }

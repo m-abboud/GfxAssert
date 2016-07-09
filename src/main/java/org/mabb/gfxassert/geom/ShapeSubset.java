@@ -29,18 +29,6 @@ import static org.mabb.gfxassert.geom.ShapeSubset.AreaDescriptor.SearchType.*;
 
 public class ShapeSubset {
     protected List<AreaDescriptor> searchAreas = new ArrayList<AreaDescriptor>();
-    protected String description = "";
-
-    private static final String TOP_AREA_DESCRIPTION = "Top Area";
-    private static final String BOTTOM_AREA_DESCRIPTION = "Bottom Area";
-    private static final String RIGHT_AREA_DESCRIPTION = "Right Area";
-    private static final String LEFT_AREA_DESCRIPTION = "Left Area";
-    private static final String ALL_AREA_DESCRIPTION = "All";
-
-    private static final String TOP_RIGHT_DESCRIPTION = "Top Right Area";
-    private static final String TOP_LEFT_DESCRIPTION = "Top Left Area";
-    private static final String BOTTOM_RIGHT_DESCRIPTION = "Bottom Right Area";
-    private static final String BOTTOM_LEFT_DESCRIPTION = "Bottom Left Area";
 
     public ShapeSubset(AreaDescriptor... shapes) {
         searchAreas.addAll(Arrays.asList(shapes));
@@ -66,7 +54,6 @@ public class ShapeSubset {
         ShapeSubset area = new ShapeSubset();
         area.add(new PercentArea(50, TOP));
         area.add(new PercentArea(50, RIGHT));
-        area.description = TOP_RIGHT_DESCRIPTION;
 
         return area;
     }
@@ -75,7 +62,6 @@ public class ShapeSubset {
         ShapeSubset area = new ShapeSubset();
         area.add(new PercentArea(50, TOP));
         area.add(new PercentArea(50, LEFT));
-        area.description = TOP_LEFT_DESCRIPTION;
 
         return area;
     }
@@ -84,7 +70,6 @@ public class ShapeSubset {
         ShapeSubset area = new ShapeSubset();
         area.add(new PercentArea(50, BOTTOM));
         area.add(new PercentArea(50, RIGHT));
-        area.description = BOTTOM_RIGHT_DESCRIPTION;
 
         return area;
     }
@@ -93,7 +78,6 @@ public class ShapeSubset {
         ShapeSubset area = new ShapeSubset();
         area.add(new PercentArea(50, BOTTOM));
         area.add(new PercentArea(50, LEFT));
-        area.description = BOTTOM_LEFT_DESCRIPTION;
 
         return area;
     }
@@ -101,7 +85,6 @@ public class ShapeSubset {
     public static ShapeSubset all() {
         ShapeSubset area = new ShapeSubset();
         area.add(new PercentArea(100, ALL));
-        area.description = ALL_AREA_DESCRIPTION;
 
         return area;
     }
@@ -120,9 +103,6 @@ public class ShapeSubset {
     }
 
     public String toString() {
-        if (!description.isEmpty())
-            return description;
-
         String formattedAreas = "";
 
         for (AreaDescriptor area : searchAreas) {
@@ -203,8 +183,13 @@ public class ShapeSubset {
 
         public abstract Shape applyForContainer(Shape container);
 
+        protected abstract String getUnit();
+
         public String toString() {
             String area = StringUtils.capitalize(searchArea.toString().toLowerCase());
+            if (searchArea == ALL)
+                return area;
+
             return area + " " + number;
         }
     }
@@ -256,8 +241,8 @@ public class ShapeSubset {
             return scaledAreaOn;
         }
 
-        public String toString() {
-            return super.toString() + "%";
+        public String getUnit() {
+            return "%";
         }
     }
 
@@ -299,8 +284,8 @@ public class ShapeSubset {
             return rect;
         }
 
-        public String toString() {
-            return super.toString() + "px";
+        public String getUnit() {
+            return "px";
         }
     }
 }
