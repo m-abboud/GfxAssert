@@ -65,7 +65,7 @@ public abstract class GraphicsMatcher extends MultiTypeSafeMatcher<BufferedImage
         String alpha = "";
         if (color.getAlpha() != 255)
             alpha = ",a=" + color.getAlpha();
-        
+
         return String.format("[r=%d,g=%d,b=%d%s]", color.getRed(), color.getGreen(), color.getBlue(), alpha);
 
     }

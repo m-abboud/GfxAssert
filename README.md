@@ -1,6 +1,5 @@
 # GfxAssert
-A set of possibley useful Java (unit)test tools for geometric shapes and images.
-Uses hamcrest matchers and alternate static assert methods.
+A set of possibley useful Java (unit)test tools for geometric shapes and images using hamcrest matchers.
 
 ## Maven
     <dependencies>

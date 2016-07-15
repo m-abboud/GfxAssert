@@ -22,6 +22,8 @@ import org.mabb.gfxassert.geom.ShapeSubset;
 import java.awt.Color;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -43,6 +45,17 @@ class GfxAssertImage extends BufferedImage {
         searchPixels(area, strat);
 
         return strat.colors;
+    }
+
+    public HashMap<Color, Integer> findColorsCount(ShapeSubset area) {
+        FindColorsUsage strat = new FindColorsUsage();
+        searchPixels(area, strat);
+
+        return strat.colors;
+    }
+
+    public double findColorPixelPercentage(ShapeSubset area, Color color) {
+        return (findColorsCount(area).get(color) / getWidth() * getHeight()) * 100.0;
     }
 
     protected void searchPixels(ShapeSubset area, PixelSearchStrategy strat) {
@@ -101,6 +114,19 @@ class GfxAssertImage extends BufferedImage {
         public boolean onPixel(Color color, int x, int y) {
             if (!colors.contains(color))
                 colors.add(color);
+
+            return false;
+        }
+    }
+
+    class FindColorsUsage implements PixelSearchStrategy {
+        final HashMap<Color, Integer> colors = new LinkedHashMap<Color, Integer>();
+
+        public boolean onPixel(Color color, int x, int y) {
+            if (colors.containsKey(color))
+                colors.put(color, colors.get(color) + 1);
+            else
+                colors.put(color, 1);
 
             return false;
         }
