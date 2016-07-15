@@ -17,8 +17,6 @@
 
 package org.mabb.gfxassert.geom;
 
-import com.sun.xml.internal.ws.util.StringUtils;
-
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
@@ -186,11 +184,25 @@ public class ShapeSubset {
         protected abstract String getUnit();
 
         public String toString() {
-            String area = StringUtils.capitalize(searchArea.toString().toLowerCase());
+            String area = searchArea.toString();
+            area = capitialize(area);
+
+
             if (searchArea == ALL)
                 return area;
 
-            return area + " " + number;
+            return area + " " + number + getUnit();
+        }
+
+        private String capitialize(String str) {
+            if (str == null || str.isEmpty())
+                return str;
+
+            str = str.toLowerCase();
+            char[] chars = str.toCharArray();
+            chars[0] = new String(new char[]{chars[0]}).toUpperCase().toCharArray()[0];
+
+            return new String(chars);
         }
     }
 
