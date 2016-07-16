@@ -187,14 +187,13 @@ public class ShapeSubset {
             String area = searchArea.toString();
             area = capitialize(area);
 
-
             if (searchArea == ALL)
                 return area;
 
             return area + " " + number + getUnit();
         }
 
-        private String capitialize(String str) {
+        private static String capitialize(String str) {
             if (str == null || str.isEmpty())
                 return str;
 
