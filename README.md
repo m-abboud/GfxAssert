@@ -4,18 +4,17 @@ A set of possibley useful Java (unit)test tools for geometric shapes and images 
 ## Maven
     <dependencies>
 		<dependency>
-			<groupId>org.mabb.gfxassert</groupId>
+			<groupId>net.mabboud.gfxassert</groupId>
 			<artifactId>GfxAssert</artifactId>
-            <version>0.1.2</version>
+            <version>1.0.4</version>
 		</dependency>
     </dependencies>
 
     <repositories>
-        <repository>
-            <id>bintray-m-abboud</id>
-            <name>bintray</name>
-            <url>https://dl.bintray.com/m-abboud/maven/</url>
-        </repository>
+		<repository>
+			<id>jcenter</id>
+			<url>http://jcenter.bintray.com </url>
+		</repository>
     </repositories>
 
 
