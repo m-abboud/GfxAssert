@@ -1,7 +1,7 @@
 # GfxAssert
 A set of possibley useful Java (unit)test tools for geometric shapes and images using hamcrest matchers.
 
-## Maven
+## Maven (On Maven Central and jCenter)
     <dependencies>
 		<dependency>
 			<groupId>net.mabboud.gfxassert</groupId>
@@ -9,13 +9,6 @@ A set of possibley useful Java (unit)test tools for geometric shapes and images 
             <version>1.0.4</version>
 		</dependency>
     </dependencies>
-
-    <repositories>
-		<repository>
-			<id>jcenter</id>
-			<url>http://jcenter.bintray.com </url>
-		</repository>
-    </repositories>
 
 
 ## Basic Usage
