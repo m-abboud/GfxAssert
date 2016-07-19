@@ -1,5 +1,5 @@
 # GfxAssert
-[![Build Status](https://travis-ci.org/m-abboud/FontVerter.svg?branch=master)](https://travis-ci.org/m-abboud/FontVerter)
+[![Build Status](https://travis-ci.org/m-abboud/GfxAssert.svg?branch=master)](https://travis-ci.org/m-abboud/GfxAssert)
 
 A set of possibley useful Java (unit)test tools for geometric shapes and images using hamcrest matchers.
 
