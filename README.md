@@ -1,9 +1,16 @@
 # GfxAssert
 [![Build Status](https://travis-ci.org/m-abboud/GfxAssert.svg?branch=master)](https://travis-ci.org/m-abboud/GfxAssert)
 
-A set of possibley useful Java (unit)test tools for geometric shapes and images using hamcrest matchers.
+GfxAssert is an experimental way of using graphical and gemoetric asserts in test code. If your program outputs an image or something that can be converted to an image you could use this library to assert that certain colors appear in certain areas to fuzzy assert a feature is working. 
 
-## Maven (On Maven Central and jCenter)
+An example of what could use this is a simple program that exports images with rectangles of various colors, to test that a green shape is indeed in the final image output in only the top half you can call 
+```java
+    assertThat(image, containsOnlyColor(Color.green).in(top(50).percent()));
+```
+
+This gives an advantage over something like comparing the image files and failing if they are different. If f we need to change our simple program to anti alias our green rectangles the compare files test will now be broken and must be changed. The containsColor test is more decoupled from the code so it needs to change less which is good. Good tests should not need to be changed when the feature they test is unchanged or implementation is changed.
+
+## Maven (On Maven Central)
     <dependencies>
 		<dependency>
 			<groupId>net.mabboud.gfxassert</groupId>
