@@ -10,7 +10,7 @@ A simple example of what could use this is a program that exports images with re
 
 This gives an advantage over something like comparing the image files and failing if they are different. If f we need to change our simple program to anti alias our green rectangles the compare files test will now be broken and must be changed. The containsColor test is more decoupled from the code so it needs to change less which is good. Good tests should not need to be changed when the feature they test is unchanged or implementation is changed.
 
-A more real example would be document proccessing programs such as a PDF to HTML converter where the final output can change a lot while it's under development but certain finished features can be tested in the output by eeking them out with this. A test could be something like a test PDF with a filled rectangle. But then it's realized there's a bug effecting rect alignment by a couple pixels. When the bug is fixed a serialized compare test would break but a leanent graphical assert would still work saving time and effort, yay.
+A more real example would be document proccessing programs such as a PDF to HTML converter where the final output can change a lot while it's under development but certain finished features can be tested in the output by eeking them out with this. Consider a test that converts a PDF with a filled rectangle to HTML and is testing the filled rectangle color conversion feature. When a bug effecting rect alignment by a couple pixels is fixed a serialized compare test would break but a leanent graphical assert would still work saving time and effort, yay.
 
 ## Maven (On Maven Central)
     <dependencies>
