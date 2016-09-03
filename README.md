@@ -3,12 +3,14 @@
 
 GfxAssert is an experimental way of using graphical and gemoetric asserts in test code. If your program outputs an image or something that can be converted to an image you could use this library to assert that certain colors appear in certain areas to fuzzy assert a feature is working. 
 
-An example of what could use this is a simple program that exports images with rectangles of various colors, to test that a green shape is indeed in the final image output in only the top half you can call 
+A simple example of what could use this is a program that exports images with rectangles of various colors, to test that a green shape is indeed in the final image output in only the top half you can call 
 ```java
     assertThat(image, containsOnlyColor(Color.green).in(top(50).percent()));
 ```
 
 This gives an advantage over something like comparing the image files and failing if they are different. If f we need to change our simple program to anti alias our green rectangles the compare files test will now be broken and must be changed. The containsColor test is more decoupled from the code so it needs to change less which is good. Good tests should not need to be changed when the feature they test is unchanged or implementation is changed.
+
+A more real example would be document proccessing programs such as a PDF to HTML converter where the final output can change a lot while it's under development but certain finished features can be tested in the output by eeking them out with this. A test could be something like a test PDF with a filled rectangle. But then it's realized there's a bug effecting rect alignment by a couple pixels. When the bug is fixed a serialized compare test would break but a leanent graphical assert would still work saving time and effort, yay.
 
 ## Maven (On Maven Central)
     <dependencies>
